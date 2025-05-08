@@ -1,4 +1,10 @@
 class User:
+
+    name = str
+    agency = str
+    account = str
+    current_balance = float
+    
     def __init__(self, name : str, agency: str, account: str, current_balance:float):
         if len(agency) != 4 or not agency.isdigit():
             raise ValueError("Agencia deve conter exatamente 4 dígitos.")
