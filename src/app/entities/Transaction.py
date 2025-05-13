@@ -7,9 +7,9 @@ class Transactions:
     timestamp: float
     current_balance: float
 
-    def __init__(self, timestamp: float, current_balance: float, notes: Dict[int, int], trnsaction_type: str):
-        self.notes = notes
-        self.ammount = sum(note * qty for note, qty in notes.items())
+    def __init__(self, timestamp: float, current_balance: float, bills: Dict[int, int], trnsaction_type: str):
+        self.bills = bills
+        self.ammount = sum(note * qty for note, qty in bills.items())
 
         if trnsaction_type == "deposit":
             self.current_balance = current_balance + self.ammount
