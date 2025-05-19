@@ -1,6 +1,5 @@
 from typing import Dict, Optional, List
 from src.app.entities.transaction import Transactions
-from src.app.enums.transaction_type_enum import TransactionTypeEnum
 from transaction_repository_interface import ITransactionRepository
 
 
@@ -9,8 +8,8 @@ class TransactionsRepositoryMock(ITransactionRepository):
 
     def __init__(self):
         self.transactions = {
-            1: Transactions(timestamp=0, current_balance=1000.0, notes={"10": 1, "50": 1}, trnsaction_type="deposit"),
-            2: Transactions(timestamp=0, current_balance=1060.0, notes={"20": 3}, trnsaction_type="withdraw")
+            1: Transactions(timestamp=0, current_balance=1000.0, bills={"10": 1, "50": 1}, trnsaction_type="deposit"),
+            2: Transactions(timestamp=0, current_balance=1060.0, bills={"20": 3}, trnsaction_type="withdraw")
         }
 
     def get_all_transactions(self) -> List[Transactions]:
@@ -29,7 +28,7 @@ class TransactionsRepositoryMock(ITransactionRepository):
     def update_transaction(
         self,
         transaction_id: int,
-        notes: Optional[Dict[str, int]] = None,
+        bills: Optional[Dict[str, int]] = None,
         current_balance: Optional[float] = None,
         trnsaction_type: Optional[str] = None
     ) -> Optional[Transactions]:
@@ -37,9 +36,9 @@ class TransactionsRepositoryMock(ITransactionRepository):
         if not transaction:
             return None
 
-        if notes is not None:
-            transaction.notes = notes
-            transaction.ammount = sum(int(k) * v for k, v in notes.items())
+        if bills is not None:
+            transaction.bills = bills
+            transaction.ammount = sum(int(k) * v for k, v in bills.items())
 
         if current_balance is not None:
             transaction.current_balance = current_balance
