@@ -1,21 +1,30 @@
 from src.app.entities.user import User
+from src.app.repo.user_repository_interface import IUserRepository
 
 
 class UserRepositoryMock:
     def __init__(self):
-        self.user = {
-            "name": "Nikolas Velho",
-            "agency": "1234",
-            "account": "12345-6",
-            "current_balance": 1000.0
-        }
+        self.user = User(
+            name="Nikolas Funke",
+            agency="1234",
+            account="12345-6",
+            current_balance=1000.0
+        )
 
-    def get_user(self):
+    def get_user(self) -> User:
         return self.user
     
-    def update_balance(self, new_balance):
-        if new_balance < 0:
-            raise ValueError("O saldo não pode ser negativo.")
+    def create_user(self, user: User) -> User:
+        self.user = user
+        return self.user
+    
+    def update_user(self, user: User) -> User:
+        self.user = user
+        return self.user
+    
+    def set_current_balance(self, new_balance: float) -> None:
         self.user.current_balance = new_balance
-        return {"message": "Saldo atualizado com sucesso!", "new_balance": self.user.current_balance}
+        return self.user
+    def get_current_balance(self) -> float:
+        return self.user.current_balance
     
