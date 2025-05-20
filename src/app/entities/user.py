@@ -80,4 +80,11 @@ class User:
             return(False, "Name must be at least 3 characters long")
         return(True, "")
     
+    def to_dict(self) -> dict:
+        return {
+            'name': self.name, 
+            'agency': self.agency,
+            'account': self.account,
+            'current_balance': self.current_balance
+        }
         
