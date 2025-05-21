@@ -4,8 +4,10 @@ import os
 
 from .errors.environment_errors import EnvironmentNotFound
 
-from .repo.item_repository_interface import IItemRepository
+from .repo.user_repository_interface import IUserRepository
 
+from .repo.transaction_repository_interface import ITransactionRepository   
+from .repo.transaction_history_repository_interface import ITransactionHistoryRepository
 
 class STAGE(Enum):
     DOTENV = "DOTENV"
@@ -23,25 +25,28 @@ class Environments:
     """
     stage: STAGE
 
-    def _configure_local(self):
-        from dotenv import load_dotenv
-        load_dotenv()
-        os.environ["STAGE"] = os.environ.get("STAGE") or STAGE.TEST.value
-
-    def load_envs(self):
-        if "STAGE" not in os.environ or os.environ["STAGE"] == STAGE.DOTENV.value:
-            self._configure_local()
-
-        self.stage = STAGE[os.environ.get("STAGE")]
-
     @staticmethod
-    def get_item_repo() -> IItemRepository:
+    def get_user_repo() -> IUserRepository:
         if Environments.get_envs().stage == STAGE.TEST:
-            from .repo.item_repository_mock import ItemRepositoryMock
-            return ItemRepositoryMock
+            from .repo.user_repository_mock import UserRepositoryMock
+            return UserRepositoryMock
         # use "elif" conditional to add other stages
         else:
             raise EnvironmentNotFound("STAGE")
+        
+    @staticmethod
+    def get_transaction_repo() -> ITransactionRepository:
+        if Environments.get_envs().stage == STAGE.TEST:
+            from .repo.transaction_repository_mock import TransactionsRepositoryMock
+            return TransactionsRepositoryMock
+        else:
+            raise EnvironmentNotFound("STAGE")
+        
+    @staticmethod
+    def get_transaction_history_repo() -> ITransactionHistoryRepository:
+        if Environments.get_envs().stage ==STAGE.TEST:
+            from .repo.transaction_history_repository_mock import TransactionsHistoryRepositoryMock
+            return TransactionsHistoryRepositoryMock
         
 
     @staticmethod

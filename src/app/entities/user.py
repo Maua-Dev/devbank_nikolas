@@ -3,12 +3,18 @@ from ..errors.entity_errors import ParamNotValidated
 
 
 class User:
-    name = str
-    agency = str
-    account = str
-    current_balance = float
+    user_id: int 
+    name: str
+    agency: str
+    account: str
+    current_balance: float
     
-    def __init__(self, name : str=None, agency: str=None, account: str=None, current_balance:float=None):
+    def __init__(self, user_id: int=None, name : str=None, agency: str=None, account: str=None, current_balance:float=None):
+        validation_user_id = self.validate_user_id(user_id)
+        if validation_user_id[0] is False:
+            raise ParamNotValidated("user_id", validation_user_id[1])
+        self.user_id = user_id
+
         validation_agency = self.validate_agency(agency)
         if validation_agency[0] is False:
             raise ParamNotValidated("agency", validation_agency[1])
@@ -79,12 +85,23 @@ class User:
         if len(name) < 3:
             return(False, "Name must be at least 3 characters long")
         return(True, "")
-    
+
+    @staticmethod
+    def validate_user_id(user_id: int) -> Tuple[bool, str]:
+        if user_id is None:
+            return (False, "User ID is required")
+        if type(user_id) != int:
+            return (False, "User ID must be an integer")
+        if user_id < 0:
+            return (False, "User ID must be a positive number")
+        return (True, "")
+
     def to_dict(self) -> dict:
         return {
+            'user_id': self.user_id,
             'name': self.name, 
             'agency': self.agency,
             'account': self.account,
             'current_balance': self.current_balance
         }
-        
+

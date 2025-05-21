@@ -28,7 +28,7 @@ class TransactionsRepositoryMock(ITransactionRepository):
     def get_all_transactions(self) -> List[Transactions]:
         return self.transactions.values()
     
-    def create_transaction(self, transaction: Transactions) -> Transactions:
+    def create_transaction(self, transaction: Transactions, transaction_id: int) -> Transactions:
         transaction_id = len(self.transactions) + 1
         self.transactions[transaction_id] = transaction
         return transaction
