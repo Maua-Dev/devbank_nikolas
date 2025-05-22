@@ -1,6 +1,4 @@
-from datetime import datetime
-from typing import Dict
-from typing import Tuple
+from typing import Dict, Tuple
 from ..errors.entity_errors import ParamNotValidated
 from ..enums.transaction_type_enum import TransactionTypeEnum
 from ..enums.bills_enum import BillsEnum
@@ -11,7 +9,7 @@ class Transactions:
     transaction_type: TransactionTypeEnum
     bills: Dict[str, int]
 
-    def __init__(self, transaction_type: TransactionTypeEnum, bills: Dict[str, int]):
+    def __init__(self, transaction_type: TransactionTypeEnum=None, bills: Dict[str, int]=None):
         validation_transaction_type = self.validate_transaction_type(transaction_type)
         if validation_transaction_type[0] is False:
             raise ParamNotValidated("transaction_type", validation_transaction_type[1])
@@ -39,8 +37,11 @@ class Transactions:
             return(False, "Bills is required")
         if type(bills) != dict:
             return(False, "Bills must be a dict")
-        if bills not in BillsEnum:
-            return(False, "Bills must be a dict with BillsEnum")
+        for bill_value, quantity in bills.items():
+            if bill_value not in [bill.value for bill in BillsEnum]:
+                return(False, f"Invalid bill value: {bill_value}")
+            if quantity < 0:
+                return(False, f"Bill quantity must be positive: {quantity}")
         return(True, "")
     
     def to_dict(self) -> Dict:

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from mangum import Mangum
 from .environments import Environments
+from src.app.repo.user_repository_mock import UserRepositoryMock
 
 app = FastAPI()
 
@@ -11,7 +12,7 @@ transaction_history_repo = Environments.get_transaction_history_repo()()
 @app.get("/")
 def get_user():
 
-    user = user_repo.get_user(1)
+    user = UserRepositoryMock.get_user(1)
     if user is None:
         raise HTTPException(status_code=404, detail="User Not found")
     

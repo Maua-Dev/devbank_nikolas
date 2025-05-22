@@ -50,18 +50,18 @@ class User:
         return(True, "")
     
     @staticmethod
-    def validate_account(account:str) -> Tuple[bool, str]:
+    def validate_account(account: str) -> Tuple[bool, str]:
         if account is None:
             return(False, "Account is required")
         if type(account) != str:
             return(False, "Account must be a string")
-        if not account.isdigit():
-            return(False, "Account must be numbers")
         parts = account.split("-")
         if len(parts) != 2:
             return(False, "Account must be in the format XXXXX-X")
+        if not parts[0].isdigit() or not parts[1].isdigit():
+            return(False, "Account must be numbers")
         if len(parts[0]) != 5:
-            return(False, "Account must be im the format XXXXX-X")
+            return(False, "Account must be in the format XXXXX-X")
         if len(parts[1]) != 1:
             return(False, "Account must be in the format XXXXX-X")
         return(True, "")

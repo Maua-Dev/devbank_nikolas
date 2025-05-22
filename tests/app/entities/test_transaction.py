@@ -28,7 +28,7 @@ class Test_Transaction:
         }
     def test_transaction_dict(self):
         transaction = Transactions(
-            transaction_type=TransactionTypeEnum.DEPOSTI,
+            transaction_type=TransactionTypeEnum.DEPOSIT,
             bills={
                 "2": 1,
                 "5": 2,
@@ -93,28 +93,26 @@ class Test_Transaction:
                 }
             )
     def test_transaction_type_withdraw(self):
-        with pytest.raises(ParamNotValidated):
-            transaction = Transactions(
-                transaction_type=TransactionTypeEnum.WITHDRAW,
-                bills={
-                    "2": 1,
-                    "5": 1
-                }
-            )
-            assert transaction.transaction_type == TransactionTypeEnum.WITHDRAW
+        transaction = Transactions(
+            transaction_type=TransactionTypeEnum.WITHDRAW,
+            bills={
+                "2": 1,
+                "5": 1
+            }
+        )
+        assert transaction.transaction_type == TransactionTypeEnum.WITHDRAW
 
     def test_transaction_with_all_bills(self):
-        with pytest.raises(ParamNotValidated):
-            transaction = Transactions(
-                transaction_type=TransactionTypeEnum.DEPOSIT,
-                bills={
-                    "2": 1,
-                    "5": 1,
-                    "10": 1,
-                    "20": 1,
-                    "50": 1,
-                    "100": 1,
-                    "200": 1  
-                }
-            )
-            assert len(transaction.bills) == 7
+        transaction = Transactions(
+            transaction_type=TransactionTypeEnum.DEPOSIT,
+            bills={
+                "2": 1,
+                "5": 1,
+                "10": 1,
+                "20": 1,
+                "50": 1,
+                "100": 1,
+                "200": 1
+            }
+        )
+        assert len(transaction.bills) == 7
