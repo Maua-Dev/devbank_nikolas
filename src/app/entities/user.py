@@ -59,11 +59,11 @@ class User:
             return(False, "Account must be numbers")
         parts = account.split("-")
         if len(parts) != 2:
-            return(False, "Account must be in the format XXXX-X")
+            return(False, "Account must be in the format XXXXX-X")
         if len(parts[0]) != 5:
-            return(False, "Account must be im the format XXXX-X")
+            return(False, "Account must be im the format XXXXX-X")
         if len(parts[1]) != 1:
-            return(False, "Account must be in the format XXXX-X")
+            return(False, "Account must be in the format XXXXX-X")
         return(True, "")
     
     @staticmethod

@@ -30,49 +30,49 @@ class TransactionHistory:
             raise ParamNotValidated("timestamp", validation_timestamp[1])
         self.timestamp = timestamp
 
-        @staticmethod
-        def validate_transaction_type(transaction_type: TransactionTypeEnum) -> Tuple[bool, str]:
-            if transaction_type is None:
-                return(False, "Transaction is required")
-            if type(transaction_type) != TransactionTypeEnum:
-                return(False, "Transaction must be a TransactionTypeEnum")
-            if transaction_type not in TransactionTypeEnum:
-                return(False, "Transaction must be a TransactionTypeEnum")
-            return(True, "")
+    @staticmethod
+    def validate_transaction_type(transaction_type: TransactionTypeEnum) -> Tuple[bool, str]:
+        if transaction_type is None:
+            return(False, "Transaction is required")
+        if type(transaction_type) != TransactionTypeEnum:
+            return(False, "Transaction must be a TransactionTypeEnum")
+        if transaction_type not in TransactionTypeEnum:
+            return(False, "Transaction must be a TransactionTypeEnum")
+        return(True, "")
+    
+    @staticmethod
+    def validate_current_balance(current_balance: float) -> Tuple[bool, str]:
+        if current_balance is None:
+            return(False, "Current balance is required")
+        if type(current_balance) != float:
+            return(False, "Current balance must be a float")
+        if current_balance < 0:
+            return(False, "Current balance must be greater than or equal to 0")
+        return(True, "")
+    
+    @staticmethod
+    def validate_ammount(ammount: float) -> Tuple[bool, str]:
+        if ammount is None:
+            return(False, "Ammount is required")
+        if type(ammount) != float:
+            return(False, "Ammount must be a float")
+        if ammount < 0:
+            return(False, "Ammount must be greater than or equal to 0")
+        return(True, "")
+    
+    @staticmethod
+    def validate_timestamp(timestamp:str) -> Tuple[bool, str]:
+        if timestamp is None:
+            return(False, "Timestamp is required")
+        if type(timestamp) != str:
+            return(False, "Timestamp must be a string")
+        return(True, "")
+    
+    def to_dict(self) -> dict:
+        return {
+            "transaction_type": self.transaction_type,
+            "current_balance": self.current_balance,
+            "ammount": self.ammount,
+            "timestamp": self.timestamp
+        }
         
-        @staticmethod
-        def validate_current_balance(current_balance: float) -> Tuple[bool, str]:
-            if current_balance is None:
-                return(False, "Current balance is required")
-            if type(current_balance) != float:
-                return(False, "Current balance must be a float")
-            if current_balance < 0:
-                return(False, "Current balance must be greater than or equal to 0")
-            return(True, "")
-        
-        @staticmethod
-        def validate_ammount(ammount: float) -> Tuple[bool, str]:
-            if ammount is None:
-                return(False, "Ammount is required")
-            if type(ammount) != float:
-                return(False, "Ammount must be a float")
-            if ammount < 0:
-                return(False, "Ammount must be greater than or equal to 0")
-            return(True, "")
-        
-        @staticmethod
-        def validate_timestamp(timestamp:str) -> Tuple[bool, str]:
-            if timestamp is None:
-                return(False, "Timestamp is required")
-            if type(timestamp) != str:
-                return(False, "Timestamp must be a string")
-            return(True, "")
-        
-        def to_dict(self) -> dict:
-            return {
-                "transaction_type": self.transaction_type,
-                "current_balance": self.current_balance,
-                "ammount": self.ammount,
-                "timestamp": self.timestamp
-            }
-            
