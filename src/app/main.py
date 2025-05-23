@@ -9,10 +9,12 @@ user_repo = Environments.get_user_repo()()
 transaction_repo = Environments.get_transaction_repo()()
 transaction_history_repo = Environments.get_transaction_history_repo()()
 
-@app.get("/")
-def get_user():
+in_user_id = 1
 
-    user = UserRepositoryMock.get_user(user_id=1)
+@app.get("/users/get_user/{user_id}")
+def get_user(user_id: int):
+
+    user = user_repo.get_user(user_id=in_user_id)
     if user is None:
         raise HTTPException(status_code=404, detail="User Not found")
     
