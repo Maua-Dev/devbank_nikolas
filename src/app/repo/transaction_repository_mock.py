@@ -1,6 +1,6 @@
 from typing import Dict, Optional, List
 from ..entities.Transaction import Transactions
-from ..repo.transaction_repository_interface import ITransactionRepository
+from .transaction_repository_interface import ITransactionRepository
 from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class TransactionsRepositoryMock(ITransactionRepository):
@@ -29,6 +29,5 @@ class TransactionsRepositoryMock(ITransactionRepository):
         return self.transactions.values()
     
     def create_transaction(self, transaction: Transactions, transaction_id: int) -> Transactions:
-        transaction_id = len(self.transactions) + 1
         self.transactions[transaction_id] = transaction
         return transaction
