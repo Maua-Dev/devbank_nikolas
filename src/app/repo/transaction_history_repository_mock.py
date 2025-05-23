@@ -1,6 +1,6 @@
 from typing import Dict, Optional, List
 from ..entities.transaction_history import TransactionHistory
-from transaction_history_repository_interface import ITransactionHistoryRepository
+from .transaction_history_repository_interface import ITransactionHistoryRepository
 from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class TransactionsHistoryRepositoryMock(ITransactionHistoryRepository):
