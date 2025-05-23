@@ -83,4 +83,4 @@ class Environments:
         return envs
 
     def __repr__(self):
-        return self.__dict__
+        return f"Enviroments(stage={self.stage})"
