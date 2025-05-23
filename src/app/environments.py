@@ -42,7 +42,6 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from .repo.item_repository_mock import ItemRepositoryMock
             return ItemRepositoryMock
-        # use "elif" conditional to add other stages
         else:
             raise EnvironmentNotFound("STAGE")
         
@@ -51,7 +50,6 @@ class Environments:
         if Environments.get_envs().stage == STAGE.TEST:
             from .repo.user_repository_mock import UserRepositoryMock
             return UserRepositoryMock
-        # use "elif" conditional to add other stages
         else:
             raise EnvironmentNotFound("STAGE")
         
