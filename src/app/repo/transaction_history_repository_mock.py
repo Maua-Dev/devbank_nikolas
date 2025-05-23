@@ -1,7 +1,7 @@
 from typing import Dict, Optional, List
-from src.app.entities.transaction_history import TransactionHistory
+from ..entities.transaction_history import TransactionHistory
 from transaction_history_repository_interface import ITransactionHistoryRepository
-from src.app.enums.transaction_type_enum import TransactionTypeEnum
+from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class TransactionsHistoryRepositoryMock(ITransactionHistoryRepository):
     transactions_history: List[TransactionHistory]

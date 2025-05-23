@@ -1,7 +1,7 @@
-from src.app.entities.user import User
-from src.app.repo.user_repository_interface import IUserRepository
+from ..entities.user import User
+from ..repo.user_repository_interface import IUserRepository
 from typing import List, Optional
-from src.app.errors.entity_errors import ParamNotValidated
+from ..errors.entity_errors import ParamNotValidated
 
 
 

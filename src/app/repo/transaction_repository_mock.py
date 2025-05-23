@@ -1,7 +1,7 @@
 from typing import Dict, Optional, List
-from src.app.entities.transaction import Transactions
+from ..entities.transaction import Transactions
 from transaction_repository_interface import ITransactionRepository
-from src.app.enums.transaction_type_enum import TransactionTypeEnum
+from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class TransactionsRepositoryMock(ITransactionRepository):
     transactions: Dict[int, Transactions]

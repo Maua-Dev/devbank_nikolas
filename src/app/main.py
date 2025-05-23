@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from mangum import Mangum
 from .environments import Environments
-from src.app.repo.user_repository_mock import UserRepositoryMock
+from .repo.user_repository_mock import UserRepositoryMock
 
 app = FastAPI()
 
