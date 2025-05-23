@@ -1,6 +1,6 @@
 from typing import Dict, Optional, List
 from ..entities.Transaction import Transactions
-from transaction_repository_interface import ITransactionRepository
+from ..repo.transaction_repository_interface import ITransactionRepository
 from ..enums.transaction_type_enum import TransactionTypeEnum
 
 class TransactionsRepositoryMock(ITransactionRepository):
@@ -8,7 +8,7 @@ class TransactionsRepositoryMock(ITransactionRepository):
     def __init__(self):
         self.transactions = {
             1: Transactions(transaction_type=TransactionTypeEnum.DEPOSIT, bills={
-                "1": 1,
+                "2": 1,
                 "5": 2,
                 "10": 3,
                 "20": 4,
@@ -16,7 +16,7 @@ class TransactionsRepositoryMock(ITransactionRepository):
                 "100": 6
             }),
             2: Transactions(transaction_type=TransactionTypeEnum.WITHDRAW, bills={
-                "1": 1,
+                "2": 1,
                 "5": 2,
                 "10": 3,
                 "20": 4,
