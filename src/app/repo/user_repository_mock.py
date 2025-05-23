@@ -1,5 +1,5 @@
 from ..entities.user import User
-from ..repo.user_repository_interface import IUserRepository
+from .user_repository_interface import IUserRepository
 from typing import List, Optional
 from ..errors.entity_errors import ParamNotValidated
 
