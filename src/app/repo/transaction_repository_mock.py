@@ -1,5 +1,5 @@
 from typing import Dict, Optional, List
-from ..entities.transaction import Transactions
+from ..entities.Transaction import Transactions
 from transaction_repository_interface import ITransactionRepository
 from ..enums.transaction_type_enum import TransactionTypeEnum
 
