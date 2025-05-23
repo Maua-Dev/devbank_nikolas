@@ -9,20 +9,20 @@ class TransactionsHistoryRepositoryMock(ITransactionHistoryRepository):
     def __init__(self):
         self.transactions_history = [
             TransactionHistory(
-                type = TransactionTypeEnum.DEPOSIT,
-                current_balence = 1000.0,
+                transaction_type= TransactionTypeEnum.DEPOSIT,
+                current_balance=1000.0,
                 ammount = 250.0,
                 timestamp = "2024-01-01 10:00:00"
             ),
             TransactionHistory(
-                type = TransactionTypeEnum.WITHDRAW,
-                current_balence = 1000.0,
+                transaction_type = TransactionTypeEnum.WITHDRAW,
+                current_balance = 1000.0,
                 ammount = 200.0,
                 timestamp = "2024-01-01 10:00:00"
             ),
             TransactionHistory(
-                type = TransactionTypeEnum.DEPOSIT,
-                current_balence = 1000.0,
+                transaction_type = TransactionTypeEnum.DEPOSIT,
+                current_balance = 1000.0,
                 ammount = 500.0,
                 timestamp = "2024-01-01 10:00:00"
             )
