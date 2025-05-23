@@ -38,7 +38,7 @@ class Test_Transaction:
                 "100": 6
             }
         )
-        assert transaction.to_dict() == {
+        assert transaction.transaction_to_dict() == {
             "transaction_type": TransactionTypeEnum.DEPOSIT,
             "bills": {
                 "2": 1,

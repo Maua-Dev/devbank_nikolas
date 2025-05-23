@@ -23,7 +23,7 @@ class Test_TransactionHistory:
             ammount=500.0,
             timestamp="2024-01-01 10:00:00"
         )
-        assert transaction.to_dict() == {
+        assert transaction.transaction_history_to_dict() == {
             "transaction_type": TransactionTypeEnum.DEPOSIT,
             "current_balance": 1000.0,
             "ammount": 500.0,

@@ -44,7 +44,7 @@ class Transactions:
                 return(False, f"Bill quantity must be positive: {quantity}")
         return(True, "")
     
-    def to_dict(self) -> Dict:
+    def transaction_to_dict(self) -> Dict:
         return {
             "transaction_type": self.transaction_type,
             "bills": self.bills

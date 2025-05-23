@@ -68,7 +68,7 @@ class TransactionHistory:
             return(False, "Timestamp must be a string")
         return(True, "")
     
-    def to_dict(self) -> dict:
+    def transaction_history_to_dict(self) -> dict:
         return {
             "transaction_type": self.transaction_type,
             "current_balance": self.current_balance,

@@ -57,7 +57,7 @@ class Environments:
         
     @staticmethod
     def get_transaction_repo() -> ITransactionRepository:
-        if Environments.get_env().stage == STAGE.TEST:
+        if Environments.get_envs().stage == STAGE.TEST:
             from .repo.transaction_repository_mock import TransactionsRepositoryMock
             return TransactionsRepositoryMock
         else:

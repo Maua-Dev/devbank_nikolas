@@ -96,7 +96,7 @@ class User:
             return (False, "User ID must be a positive number")
         return (True, "")
 
-    def to_dict(self) -> dict:
+    def user_to_dict(self) -> dict:
         return {
             'user_id': self.user_id,
             'name': self.name, 
