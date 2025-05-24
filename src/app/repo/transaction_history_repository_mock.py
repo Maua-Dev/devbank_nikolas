@@ -28,9 +28,9 @@ class TransactionsHistoryRepositoryMock(ITransactionHistoryRepository):
             )
         ]
 
-    def get_all_transactions(self) -> List[TransactionHistory]:
+    def get_transactions_history(self) -> List[TransactionHistory]:
         return self.transactions_history
     
-    def create_transaction(self, transactions_history) -> None:
+    def create_transaction(self, transactions_history: TransactionHistory) -> None:
         self.transactions_history.append(transactions_history)
         return None

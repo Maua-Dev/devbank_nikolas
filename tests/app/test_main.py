@@ -1,16 +1,49 @@
-'''from fastapi.exceptions import HTTPException
+from fastapi.exceptions import HTTPException
 import pytest
-from src.app.entities.item import Item
-from src.app.enums.item_type_enum import ItemTypeEnum
-from devbank_nikolas.src.app.main_item import get_all_items, get_item, create_item, delete_item, update_item
-from src.app.repo.item_repository_mock import UserRepositoryMock
+from src.app.main import get_user
+from src.app.repo.user_repository_mock import UserRepositoryMock
+from src.app.entities.user import User
+from src.app.repo.transaction_history_repository_mock import TransactionsHistoryRepositoryMock
+from src.app.entities.transaction_history import TransactionHistory
+from src.app.main import get_history
 
 class Test_Main:
-    def test_get_all_users(self):
+    def test_get_user(self):
         repo = UserRepositoryMock()
-        response = get_all_users()
-        assert all([item_expect.to_dict() == item for item_expect, item in zip(repo.items.values(), response.get("items"))])
-        
+        response = get_user()
+        expected_user = {
+            'name': 'Nikolas Funke',
+            'agency': '1234',
+            'account': '12345-6',
+            'current_balance': 1000.0,
+        }
+        assert response == expected_user
+
+    def test_get_histoy(self):
+        repo = TransactionsHistoryRepositoryMock()
+        response = get_history()
+        expected_history = [
+            {
+                'transaction_type': 'deposit',
+                'current_balance': 1000.0,
+                'ammount': 250.0,
+                'timestamp': '2024-01-01 10:00:00'
+            },
+            {
+                'transaction_type': 'withdraw',
+                'current_balance': 1000.0,
+                'ammount': 200.0,
+                'timestamp': '2024-01-01 10:00:00'
+            },
+            {
+                'transaction_type': 'deposit',
+                'current_balance': 1000.0,
+                'ammount': 500.0,
+                'timestamp': '2024-01-01 10:00:00'
+            }
+        ]
+        assert response == expected_history
+'''
     def test_get_item(self):
         repo = UserRepositoryMock()
         item_id = 1

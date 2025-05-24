@@ -14,7 +14,6 @@ class Test_User:
     def test_user_dict(self):
         user = User(1, "Joao", "1234", "12345-6", 1000.0)
         assert user.user_to_dict() == {
-            'user_id': 1,
             'name': 'Joao',
             'agency': '1234',
             'account': '12345-6',

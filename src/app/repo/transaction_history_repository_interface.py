@@ -4,8 +4,8 @@ from ..entities.transaction_history import TransactionHistory
 
 class ITransactionHistoryRepository(ABC):
     @abstractmethod
-    def get_all_transactions(self) -> List[TransactionHistory]:
+    def get_transactions_history(self) -> List[TransactionHistory]:
         pass
     @abstractmethod
-    def create_transaction(self, transaction: TransactionHistory):
+    def create_transaction(self, transaction: TransactionHistory) -> None:
         pass
