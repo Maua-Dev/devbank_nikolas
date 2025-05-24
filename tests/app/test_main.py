@@ -22,26 +22,28 @@ class Test_Main:
     def test_get_histoy(self):
         repo = TransactionsHistoryRepositoryMock()
         response = get_history()
-        expected_history = [
-            {
-                'transaction_type': 'deposit',
-                'current_balance': 1000.0,
-                'ammount': 250.0,
-                'timestamp': '2024-01-01 10:00:00'
-            },
-            {
-                'transaction_type': 'withdraw',
-                'current_balance': 1000.0,
-                'ammount': 200.0,
-                'timestamp': '2024-01-01 10:00:00'
-            },
-            {
-                'transaction_type': 'deposit',
-                'current_balance': 1000.0,
-                'ammount': 500.0,
-                'timestamp': '2024-01-01 10:00:00'
-            }
-        ]
+        expected_history = {
+            "history": [
+                {
+                    'transaction_type': 'deposit',
+                    'current_balance': 1000.0,
+                    'ammount': 250.0,
+                    'timestamp': '2024-01-01 10:00:00'
+                },
+                {
+                    'transaction_type': 'withdraw',
+                    'current_balance': 1000.0,
+                    'ammount': 200.0,
+                    'timestamp': '2024-01-01 10:00:00'
+                },
+                {
+                    'transaction_type': 'deposit',
+                    'current_balance': 1000.0,
+                    'ammount': 500.0,
+                    'timestamp': '2024-01-01 10:00:00'
+                }
+            ]
+        }
         assert response == expected_history
 '''
     def test_get_item(self):

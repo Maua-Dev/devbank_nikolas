@@ -22,13 +22,17 @@ def get_user():
     
     return user.user_to_dict()
 
-app.get("/history")
+@app.get("/history")
 def get_history():
     history = transaction_history_repo.get_transactions_history()
     if history is None:
         raise HTTPException(status_code=404, detail="History Not found")
     
-    return [transaction.transaction_history_to_dict() for transaction in history]
+    return {
+        "history": [
+            transaction.transaction_history_to_dict() for transaction in history
+        ]
+    }
 
 
 
