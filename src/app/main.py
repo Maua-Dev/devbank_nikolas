@@ -11,8 +11,9 @@ transaction_history_repo = Environments.get_transaction_history_repo()()
 
 in_user_id = 1
 
-@app.get("/users/get_user/{user_id}")
-def get_user(user_id: int):
+@app.get("/")
+def get_user():
+
 
     user = user_repo.get_user(user_id=in_user_id)
     if user is None:

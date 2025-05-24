@@ -3,16 +3,16 @@ import pytest
 from src.app.entities.item import Item
 from src.app.enums.item_type_enum import ItemTypeEnum
 from devbank_nikolas.src.app.main_item import get_all_items, get_item, create_item, delete_item, update_item
-from src.app.repo.item_repository_mock import ItemRepositoryMock
+from src.app.repo.item_repository_mock import UserRepositoryMock
 
 class Test_Main:
-    def test_get_all_items(self):
-        repo = ItemRepositoryMock()
-        response = get_all_items()
-        assert all([item_expect.to_dict() == item for item_expect, item in zip(repo.items.values(), response.get("items"))]) 
+    def test_get_all_users(self):
+        repo = UserRepositoryMock()
+        response = get_all_users()
+        assert all([item_expect.to_dict() == item for item_expect, item in zip(repo.items.values(), response.get("items"))])
         
     def test_get_item(self):
-        repo = ItemRepositoryMock()
+        repo = UserRepositoryMock()
         item_id = 1
         response = get_item(item_id=item_id)
         assert response == {

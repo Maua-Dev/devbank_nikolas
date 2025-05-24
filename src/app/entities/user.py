@@ -98,7 +98,6 @@ class User:
 
     def user_to_dict(self) -> dict:
         return {
-            'user_id': self.user_id,
             'name': self.name, 
             'agency': self.agency,
             'account': self.account,
