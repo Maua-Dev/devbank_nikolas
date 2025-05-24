@@ -23,7 +23,7 @@ class Test_Main:
         repo = TransactionsHistoryRepositoryMock()
         response = get_history()
         expected_history = {
-            "history": [
+            "all_transactions": [
                 {
                     'transaction_type': 'deposit',
                     'current_balance': 1000.0,

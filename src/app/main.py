@@ -29,12 +29,15 @@ def get_history():
         raise HTTPException(status_code=404, detail="History Not found")
     
     return {
-        "history": [
+        "all_transactions": [
             transaction.transaction_history_to_dict() for transaction in history
         ]
     }
 
-
+@app.post("/deposit")
+def post_deposit(ammount: float):
+    transaction = transaction_repo
+    
 
 
 
