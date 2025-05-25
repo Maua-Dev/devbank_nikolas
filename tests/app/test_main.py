@@ -8,6 +8,7 @@ from src.app.entities.transaction_history import TransactionHistory
 from src.app.repo.transaction_repository_mock import TransactionsRepositoryMock
 from src.app.main import get_history
 from src.app.main import post_deposit
+from src.app.main import post_withdraw
 
 class Test_Main:
     def test_get_user(self):
@@ -66,7 +67,32 @@ class Test_Main:
         ammount = 0
         for bill, quantity in transaction.bills.items():
             ammount += int(bill) * quantity
-        user_repo.update_balance(user_id=1, ammount=ammount, transaciton_type="deposit")
+        user_repo.update_balance(user_id=1, ammount=ammount, transaction_type="deposit")
+        expected_response = {
+            'current_balance': user.current_balance,
+            'timestamp': transaction_repo.get_transaction(1).timestamp,
+        }
+        assert response == expected_response
+
+    def test_post_withdraw(self):
+        user_repo = UserRepositoryMock()
+        transaction_repo = TransactionsRepositoryMock()
+        request = {
+            "2": 1,
+            "5": 1,
+            "10": 1,
+            "20": 1,
+            "50": 1,
+            "100": 1
+        }
+
+        response = post_withdraw(request=request)
+        user = user_repo.get_user(user_id=1)
+        transaction = transaction_repo.get_transaction(1)
+        ammount = 0
+        for bill, quantity in transaction.bills.items():
+            ammount += int(bill) * quantity
+        user_repo.update_balance(user_id=1, ammount=ammount, transaction_type="withdraw")
         expected_response = {
             'current_balance': user.current_balance,
             'timestamp': transaction_repo.get_transaction(1).timestamp,

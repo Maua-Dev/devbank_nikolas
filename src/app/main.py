@@ -51,7 +51,30 @@ def post_deposit(request: dict):
     elif ammount > 2 * user.current_balance:
         raise HTTPException(status_code=400, detail="Transaction is greater than 2x the current balance")
     else:
-        user_repo.update_balance(user_id=in_user_id, ammount=ammount, transaciton_type="deposit")
+        user_repo.update_balance(user_id=in_user_id, ammount=ammount, transaction_type="deposit")
+        return {
+            "current_balance": user.current_balance,
+            "timestamp": transaction.timestamp,
+        }
+    
+@app.post("/withdraw")
+def post_withdraw(request: dict):
+
+    ammount = 0
+    transaction = transaction_repo.get_transaction(1)
+    user = user_repo.get_user(user_id=in_user_id)
+    request = transaction.bills
+
+    for bill, quantity in transaction.bills.items():
+        ammount += int(bill) * quantity
+    if ammount is None:
+        raise HTTPException(status_code=404, detail="Transaction Not found")
+    elif ammount < 0:
+        raise HTTPException(status_code=400, detail="Transaction is negative")
+    elif ammount > 2 * user.current_balance:
+        raise HTTPException(status_code=400, detail="Transaction is greater than 2x the current balance")
+    else:
+        user_repo.update_balance(user_id=in_user_id, ammount=ammount, transaction_type="withdraw")
         return {
             "current_balance": user.current_balance,
             "timestamp": transaction.timestamp,

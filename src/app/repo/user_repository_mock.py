@@ -30,13 +30,13 @@ class UserRepositoryMock(IUserRepository):
         self.users[user.user_id] = user
         return user
 
-    def update_balance(self, user_id: int, ammount: float, transaciton_type) -> None:
+    def update_balance(self, user_id: int, ammount: float, transaction_type) -> None:
         user = self.get_user(user_id)
         if user is None:
             raise ParamNotValidated("user_id", "User not found")
-        if transaciton_type == "deposit":
+        if transaction_type == "deposit":
             user.current_balance += ammount
-        if transaciton_type == "withdraw":
+        if transaction_type == "withdraw":
             user.current_balance -= ammount
         return user.current_balance
 
