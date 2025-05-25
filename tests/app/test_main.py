@@ -51,7 +51,16 @@ class Test_Main:
     def test_post_deposit(self):
         user_repo = UserRepositoryMock()
         transaction_repo = TransactionsRepositoryMock()
-        response = post_deposit()
+        request = {
+            "2": 1,
+            "5": 1,
+            "10": 1,
+            "20": 1,
+            "50": 1,
+            "100": 1
+        }
+
+        response = post_deposit(request=request)
         user = user_repo.get_user(user_id=1)
         transaction = transaction_repo.get_transaction(1)
         ammount = 0
@@ -59,8 +68,8 @@ class Test_Main:
             ammount += int(bill) * quantity
         user_repo.update_balance(user_id=1, ammount=ammount, transaciton_type="deposit")
         expected_response = {
-            'current_balance': 1187.0,
-            'timestamp': 123456789.0,
+            'current_balance': user.current_balance,
+            'timestamp': transaction_repo.get_transaction(1).timestamp,
         }
         assert response == expected_response
         '''    

@@ -35,10 +35,12 @@ def get_history():
     }
 
 @app.post("/deposit")
-def post_deposit():
+def post_deposit(request: dict):
+
     ammount = 0
     transaction = transaction_repo.get_transaction(1)
     user = user_repo.get_user(user_id=in_user_id)
+    request = transaction.bills
 
     for bill, quantity in transaction.bills.items():
         ammount += int(bill) * quantity
