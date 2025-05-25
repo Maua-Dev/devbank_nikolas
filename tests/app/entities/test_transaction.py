@@ -10,44 +10,38 @@ class Test_Transaction:
             transaction_type=TransactionTypeEnum.DEPOSIT,
             bills={
                 "2": 1,
-                "5": 2,
-                "10": 3,
-                "20": 4,
-                "50": 5,
-                "100": 6
-            }
+                "5": 1,
+                "10": 1,
+                "20": 1,
+                "50": 1,
+                "100": 1
+            }, timestamp=123456789.0
         )
         assert transaction.transaction_type == TransactionTypeEnum.DEPOSIT
         assert transaction.bills == {
             "2": 1,
-            "5": 2,
-            "10": 3,
-            "20": 4,
-            "50": 5,
-            "100": 6
+            "5": 1,
+            "10": 1,
+            "20": 1,
+            "50": 1,
+            "100": 1
         }
+        assert transaction.timestamp == 123456789.0
     def test_transaction_dict(self):
         transaction = Transactions(
             transaction_type=TransactionTypeEnum.DEPOSIT,
             bills={
                 "2": 1,
-                "5": 2,
-                "10": 3,
-                "20": 4,
-                "50": 5,
-                "100": 6
-            }
+                "5": 1,
+                "10": 1,
+                "20": 1,
+                "50": 1,
+                "100": 1
+            }, timestamp=123456789.0
         )
         assert transaction.transaction_to_dict() == {
             "transaction_type": TransactionTypeEnum.DEPOSIT,
-            "bills": {
-                "2": 1,
-                "5": 2,
-                "10": 3,
-                "20": 4,
-                "50": 5,
-                "100": 6
-            }
+            "timestamp": 123456789.0,
         }
     def test_transaction_type_is_none(self):
         with pytest.raises(ParamNotValidated):
@@ -55,8 +49,8 @@ class Test_Transaction:
                 transaction_type=None,
                 bills={
                     "2": 1,
-                    "5": 2
-                }
+                    "5": 1
+                }, timestamp=123456789.0
             )
     def test_transaction_type_is_not_enum(self):
         with pytest.raises(ParamNotValidated):
@@ -64,15 +58,15 @@ class Test_Transaction:
                 transaction_type="DEPOSIT",
                 bills={
                     "2": 1,
-                    "5": 2
-                }
+                    "5": 1
+                }, timestamp=123456789.0
             )
 
     def test_bills_is_none(self):
         with pytest.raises(ParamNotValidated):
             Transactions(
                 transaction_type=TransactionTypeEnum.DEPOSIT,
-                bills=["2", "5"]
+                bills=["2", "5"], timestamp=123456789.0
             )
     def test_bills_with_invalid_value(self):
         with pytest.raises(ParamNotValidated):
@@ -81,7 +75,7 @@ class Test_Transaction:
                 bills={
                     "3": 1,
                     "5": 1
-                }
+                }, timestamp=123456789.0
             )
     def test_bills_with_invalid_quantity(self):
         with pytest.raises(ParamNotValidated):
@@ -90,7 +84,7 @@ class Test_Transaction:
                 bills={
                     "2": -1,
                     "5": 1
-                }
+                }, timestamp=123456789.0
             )
     def test_transaction_type_withdraw(self):
         transaction = Transactions(
@@ -98,7 +92,7 @@ class Test_Transaction:
             bills={
                 "2": 1,
                 "5": 1
-            }
+            }, timestamp=123456789.0
         )
         assert transaction.transaction_type == TransactionTypeEnum.WITHDRAW
 
@@ -113,6 +107,6 @@ class Test_Transaction:
                 "50": 1,
                 "100": 1,
                 "200": 1
-            }
+            }, timestamp=123456789.0
         )
         assert len(transaction.bills) == 7

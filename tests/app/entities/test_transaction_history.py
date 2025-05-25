@@ -9,25 +9,25 @@ class Test_TransactionHistory:
             transaction_type=TransactionTypeEnum.DEPOSIT,
             current_balance=1000.0,
             ammount=500.0,
-            timestamp="2024-01-01 10:00:00"
+            timestamp= 123456789.0
         )
         assert transaction.transaction_type == TransactionTypeEnum.DEPOSIT
         assert transaction.current_balance == 1000.0
         assert transaction.ammount == 500.0
-        assert transaction.timestamp == "2024-01-01 10:00:00"
+        assert transaction.timestamp == 123456789.0
     
     def test_transaction_history_dict(self):
         transaction = TransactionHistory(
             transaction_type=TransactionTypeEnum.DEPOSIT,
             current_balance=1000.0,
             ammount=500.0,
-            timestamp="2024-01-01 10:00:00"
+            timestamp=123456789.0
         )
         assert transaction.transaction_history_to_dict() == {
             "transaction_type": TransactionTypeEnum.DEPOSIT,
             "current_balance": 1000.0,
             "ammount": 500.0,
-            "timestamp": "2024-01-01 10:00:00"
+            "timestamp": 123456789.0
         }
 
     def test_transaction_type_is_none(self):
@@ -36,7 +36,7 @@ class Test_TransactionHistory:
                 transaction_type=None,
                 current_balance=1000.0,
                 ammount=500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_transaction_type_is_not_enum(self):
@@ -45,7 +45,7 @@ class Test_TransactionHistory:
                 transaction_type="DEPOSIT",
                 current_balance=1000.0,
                 ammount=500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_current_balance_is_none(self):
@@ -54,7 +54,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=None,
                 ammount=500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_current_balance_is_not_float(self):
@@ -63,7 +63,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance="1000.0",
                 ammount=500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_current_balance_is_negative(self):
@@ -72,7 +72,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=-1000.0,
                 ammount=500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_ammount_is_none(self):
@@ -81,7 +81,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=1000.0,
                 ammount=None,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_ammount_is_not_float(self):
@@ -90,7 +90,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=1000.0,
                 ammount="500.0",
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_ammount_is_negative(self):
@@ -99,7 +99,7 @@ class Test_TransactionHistory:
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=1000.0,
                 ammount=-500.0,
-                timestamp="2024-01-01 10:00:00"
+                timestamp=123456789.0
             )
 
     def test_timestamp_is_none(self):
@@ -111,11 +111,20 @@ class Test_TransactionHistory:
                 timestamp=None
             )
 
-    def test_timestamp_is_not_string(self):
+    def test_timestamp_is_not_float(self):
         with pytest.raises(ParamNotValidated):
             TransactionHistory(
                 transaction_type=TransactionTypeEnum.DEPOSIT,
                 current_balance=1000.0,
                 ammount=500.0,
-                timestamp=123
+                timestamp="123456789.0"
+            )
+
+    def test_timestamp_is_negative(self):
+        with pytest.raises(ParamNotValidated):
+            TransactionHistory(
+                transaction_type=TransactionTypeEnum.DEPOSIT,
+                current_balance=1000.0,
+                ammount=500.0,
+                timestamp=-1
             )

@@ -7,7 +7,7 @@ class TransactionHistory:
     transaction_type: TransactionTypeEnum
     current_balance: float
     ammount: float
-    timestamp: str
+    timestamp: float
 
     def __init__(self, transaction_type: TransactionTypeEnum=None, current_balance: float=None, ammount: float=None, timestamp: str=None):
         validation_transaction_type = self.validate_transaction_type(transaction_type)
@@ -61,11 +61,11 @@ class TransactionHistory:
         return(True, "")
     
     @staticmethod
-    def validate_timestamp(timestamp:str) -> Tuple[bool, str]:
+    def validate_timestamp(timestamp:float) -> Tuple[bool, str]:
         if timestamp is None:
             return(False, "Timestamp is required")
-        if type(timestamp) != str:
-            return(False, "Timestamp must be a string")
+        if type(timestamp) != float:
+            return(False, "Timestamp must be a float")
         return(True, "")
     
     def transaction_history_to_dict(self) -> dict:

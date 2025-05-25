@@ -8,8 +8,9 @@ from ..enums.bills_enum import BillsEnum
 class Transactions:
     transaction_type: TransactionTypeEnum
     bills: Dict[str, int]
+    timestamp: float
 
-    def __init__(self, transaction_type: TransactionTypeEnum=None, bills: Dict[str, int]=None):
+    def __init__(self, transaction_type: TransactionTypeEnum=None, bills: Dict[str, int]=None, timestamp: float=None):
         validation_transaction_type = self.validate_transaction_type(transaction_type)
         if validation_transaction_type[0] is False:
             raise ParamNotValidated("transaction_type", validation_transaction_type[1])
@@ -19,6 +20,11 @@ class Transactions:
         if validation_bills[0] is False:
             raise ParamNotValidated("bills", validation_bills[1])
         self.bills = bills
+        
+        validation_timestamp = self.validate_timestamp(timestamp)
+        if validation_timestamp[0] is False:
+            raise ParamNotValidated("timestamp", validation_timestamp[1])
+        self.timestamp = timestamp
     
     @staticmethod
     def validate_transaction_type(transaction_type: TransactionTypeEnum) -> Tuple[bool, str]:
@@ -44,9 +50,17 @@ class Transactions:
                 return(False, f"Bill quantity must be positive: {quantity}")
         return(True, "")
     
+    @staticmethod
+    def validate_timestamp(timestamp:float) -> Tuple[bool, str]:
+        if timestamp is None:
+            return(False, "Timestamp is required")
+        if type(timestamp) != float:
+            return(False, "Timestamp must be a float")
+        return(True, "")
+    
     def transaction_to_dict(self) -> Dict:
         return {
-            "transaction_type": self.transaction_type,
-            "bills": self.bills
+            "transaction_type": self.transaction_type.value,
+            "timestamp": self.timestamp,
         }
         

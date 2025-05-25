@@ -5,7 +5,9 @@ from src.app.repo.user_repository_mock import UserRepositoryMock
 from src.app.entities.user import User
 from src.app.repo.transaction_history_repository_mock import TransactionsHistoryRepositoryMock
 from src.app.entities.transaction_history import TransactionHistory
+from src.app.repo.transaction_repository_mock import TransactionsRepositoryMock
 from src.app.main import get_history
+from src.app.main import post_deposit
 
 class Test_Main:
     def test_get_user(self):
@@ -28,24 +30,40 @@ class Test_Main:
                     'transaction_type': 'deposit',
                     'current_balance': 1000.0,
                     'ammount': 250.0,
-                    'timestamp': '2024-01-01 10:00:00'
+                    'timestamp': 123456789.0
                 },
                 {
                     'transaction_type': 'withdraw',
                     'current_balance': 1000.0,
                     'ammount': 200.0,
-                    'timestamp': '2024-01-01 10:00:00'
+                    'timestamp': 123456789.0
                 },
                 {
                     'transaction_type': 'deposit',
                     'current_balance': 1000.0,
                     'ammount': 500.0,
-                    'timestamp': '2024-01-01 10:00:00'
+                    'timestamp': 123456789.0
                 }
             ]
         }
         assert response == expected_history
-'''
+
+    def test_post_deposit(self):
+        user_repo = UserRepositoryMock()
+        transaction_repo = TransactionsRepositoryMock()
+        response = post_deposit()
+        user = user_repo.get_user(user_id=1)
+        transaction = transaction_repo.get_transaction(1)
+        ammount = 0
+        for bill, quantity in transaction.bills.items():
+            ammount += int(bill) * quantity
+        user_repo.update_balance(user_id=1, ammount=ammount, transaciton_type="deposit")
+        expected_response = {
+            'current_balance': 1187.0,
+            'timestamp': 123456789.0,
+        }
+        assert response == expected_response
+        '''    
     def test_get_item(self):
         repo = UserRepositoryMock()
         item_id = 1

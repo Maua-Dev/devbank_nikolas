@@ -9,20 +9,20 @@ class TransactionsRepositoryMock(ITransactionRepository):
         self.transactions = {
             1: Transactions(transaction_type=TransactionTypeEnum.DEPOSIT, bills={
                 "2": 1,
-                "5": 2,
-                "10": 3,
-                "20": 4,
-                "50": 5,
-                "100": 6
-            }),
+                "5": 1,
+                "10": 1,
+                "20": 1,
+                "50": 1,
+                "100": 1
+            }, timestamp=123456789.0),
             2: Transactions(transaction_type=TransactionTypeEnum.WITHDRAW, bills={
                 "2": 1,
-                "5": 2,
-                "10": 3,
-                "20": 4,
-                "50": 5,
-                "100": 6
-            }),
+                "5": 1,
+                "10": 1,
+                "20": 1,
+                "50": 1,
+                "100": 1
+            }, timestamp=123456789.0),
         }
 
     def get_all_transactions(self) -> List[Transactions]:
@@ -31,3 +31,8 @@ class TransactionsRepositoryMock(ITransactionRepository):
     def create_transaction(self, transaction: Transactions, transaction_id: int) -> Transactions:
         self.transactions[transaction_id] = transaction
         return transaction
+    
+    def get_transaction(self, transaction_id: int) -> Optional[Transactions]:
+        return self.transactions.get(transaction_id, None)
+    
+    
