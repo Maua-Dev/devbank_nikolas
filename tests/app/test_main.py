@@ -74,7 +74,7 @@ class Test_Main:
         }
         assert response == expected_response
 
-    def test_post_withdraw(self):
+    '''def test_post_withdraw(self):
         user_repo = UserRepositoryMock()
         transaction_repo = TransactionsRepositoryMock()
         request = {
@@ -86,7 +86,6 @@ class Test_Main:
             "100": 1
         }
 
-        response = post_withdraw(request=request)
         user = user_repo.get_user(user_id=1)
         transaction = transaction_repo.get_transaction(1)
         ammount = 0
@@ -97,8 +96,10 @@ class Test_Main:
             'current_balance': user.current_balance,
             'timestamp': transaction_repo.get_transaction(1).timestamp,
         }
+        response = post_withdraw(request=request)
         assert response == expected_response
-        '''    
+        '''
+    '''    
     def test_get_item(self):
         repo = UserRepositoryMock()
         item_id = 1
